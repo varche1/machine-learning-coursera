@@ -100,34 +100,42 @@ fprintf('Theta computed from gradient descent: \n');
 fprintf(' %f \n', theta);
 fprintf('\n');
 
-% Estimate the price of a 1650 sq-ft, 3 br house
-% ====================== YOUR CODE HERE ======================
-% Recall that the first column of X is all-ones. Thus, it does
-% not need to be normalized.
-price = 0; % You should change this
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+% % Estimate the price of a 1650 sq-ft, 3 br house
+% % ====================== YOUR CODE HERE ======================
+% % Recall that the first column of X is all-ones. Thus, it does
+% % not need to be normalized.
+% P = [1650, 3]
+% [P mu sigma] = featureNormalize(P)
+
+% % Add intercept term to X
+% P = [ones(m, 1) P]
+% price = P * theta; % You should change this
 
 
 % ============================================================
 
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using gradient descent):\n $%f\n'], price);
+% fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+%          '(using gradient descent):\n $%f\n'], price);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
-%% ================ Part 3: Normal Equations ================
+% %% ================ Part 3: Normal Equations ================
 
-fprintf('Solving with normal equations...\n');
+% fprintf('Solving with normal equations...\n');
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: The following code computes the closed form 
-%               solution for linear regression using the normal
-%               equations. You should complete the code in 
-%               normalEqn.m
-%
-%               After doing so, you should complete this code 
-%               to predict the price of a 1650 sq-ft, 3 br house.
-%
+% % ====================== YOUR CODE HERE ======================
+% % Instructions: The following code computes the closed form 
+% %               solution for linear regression using the normal
+% %               equations. You should complete the code in 
+% %               normalEqn.m
+% %
+% %               After doing so, you should complete this code 
+% %               to predict the price of a 1650 sq-ft, 3 br house.
+% %
 
 %% Load Data
 data = csvread('ex1data2.txt');
@@ -149,8 +157,7 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
-
+price = [1, 1650, 3] * theta;
 
 % ============================================================
 

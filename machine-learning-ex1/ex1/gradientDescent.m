@@ -16,21 +16,15 @@ for iter = 1:num_iters
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCost) and gradient here.
     %
-    theta_temp = zeros(2, 1)
+    theta_temp = theta;
 
-    for i = 1:m
-        theta_temp(1) = X(i,:)*theta - y(i)
-    end
-    theta_temp(1) = theta(1) - alpha/m * theta_temp(1);
+    q1 = @(n) X(n,:)*theta - y(n);
+    q2 = @(n) (X(n,:)*theta - y(n)) * X(n, 2);
 
-    for i = 1:m
-        theta_temp(2) = (X(i,:)*theta - y(i)) * X(i,2)
-    end
-    theta_temp(2) = theta(2) - alpha/m * theta_temp(2);
-
+    theta_temp(1) = theta(1) - (alpha/m) * sum(arrayfun(q1,[1:m]));
+    theta_temp(2) = theta(2) - (alpha/m) * sum(arrayfun(q2,[1:m]));
 
     theta = theta_temp;
-
 
     % ============================================================
 

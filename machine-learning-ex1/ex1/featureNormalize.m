@@ -6,9 +6,6 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 %   working with learning algorithms.
 
 % You need to set these values correctly
-X_norm = X;
-mu = zeros(1, size(X, 2));
-sigma = zeros(1, size(X, 2));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: First, for each feature dimension, compute the mean
@@ -26,8 +23,24 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
+X_norm = X;
+mu = zeros(1, size(X, 2));
+sigma = zeros(1, size(X, 2));
 
+for i = 1:length(mu)
+    mu(i) = mean(X(:,i));
+    sigma(i) = std(X(:,i));
+end
 
+for i = 1:length(X)
+	for j = 1:length(mu)
+	    X_norm(i, j) = (X(i, j) - mu(j)) / sigma(j);
+	end
+end
+
+fprintf('mu = [%f %f]\n', mu);
+fprintf('sigma = [%f %f]\n', sigma);
+fprintf('X_norm = [%f %f]\n', [X_norm]');
 
 
 

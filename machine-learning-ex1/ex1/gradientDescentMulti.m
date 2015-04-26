@@ -17,14 +17,19 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
+    % theta_temp = theta;
 
+    % for i = 1:length(X(1,:))
+    %     q = @(n) (X(n,:)*theta - y(n) .* X(n, i));
+    %     theta_temp(i) = theta(i) - (alpha/m) * sum(arrayfun(q,[1:m]));
+    % end
 
+    % theta = theta_temp;
 
-
-
-
-
-
+    h = X * theta;  % m * 1 matrix
+    errors = h .- y;  % m * 1 matrix
+    decrement = (alpha / m) * (errors' * X);  % 1 * n
+    theta = theta - decrement';  % 1 * n
 
 
     % ============================================================

@@ -14,7 +14,31 @@ J = 0;
 %               You should set J to the cost.
 
 
+% g = @(n) (X(n,:)*theta - y(n)) ** 2;
+% J = sum(arrayfun(g,[1:m])) * (1/(2 * m));
 
+% Compute the cost(J) of a particular choice of theta
+
+% hypothesis = mx1 column vector
+% X = mxn matrix
+% theta = nx1 column vector
+hypothesis = X * theta;
+
+% errors = mx1 column vector
+% y = mx1 column vector
+errors = hypothesis .- y;
+
+% square all elements individually within 
+% column vector errors
+
+% squareOfErrors = mx1 column vector
+squareOfErrors = (errors).^2;
+
+% sumOfSquareErrors = single number
+sumOfSquareErrors = sum(squareOfErrors);
+
+% J = single number
+J = 1/(2 * m) * sumOfSquareErrors;
 
 
 % =========================================================================
