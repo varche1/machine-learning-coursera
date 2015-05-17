@@ -55,7 +55,9 @@ hold off;
 
 % Note that mapFeature also adds a column of ones for us, so the intercept
 % term is handled
+X_before = size(X);
 X = mapFeature(X(:,1), X(:,2));
+X_after = size(X);
 
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
@@ -112,5 +114,5 @@ hold off;
 p = predict(theta, X);
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
-
+pause;
 
