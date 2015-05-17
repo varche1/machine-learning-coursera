@@ -21,8 +21,18 @@ grad = zeros(size(theta));
 %
 
 
+hypothesis = sigmoid(X * theta);
+errors = -y .* log(hypothesis) - (1-y) .* log(1-hypothesis);
+sumErrors = sum(errors);
+
+% J = single number
+J = 1/m * sumErrors;
 
 
+
+errors = hypothesis .- y;  % m * 1 matrix
+grad = (1 / m) * (errors' * X);  % 1 * n
+% grad = theta - decrement';  % 1 * n
 
 
 
