@@ -24,6 +24,16 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 
 % Setup some useful variables
 m = size(X, 1);
+
+% input_layer_size
+% hidden_layer_size
+% num_labels
+% nn_params_size = size(nn_params)
+% Theta1_size = size(Theta1)
+% Theta2_size = size(Theta2)
+% Theta2_X = size(X)
+% Theta2_y = size(y)
+% m
          
 % You need to return the following variables correctly 
 J = 0;
@@ -62,30 +72,45 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a_1 = X;
+a_1 = [ones(m, 1) X];
 
+z_2 = a_1 * Theta1';
 
+a_2 = sigmoid(z_2);
 
+size_a_2 = size(a_2, 1);
+a_2 = [ones(size_a_2, 1) a_2];
+z_3 = a_2 * Theta2';
 
+a_3 = sigmoid(z_3);
 
+h = a_3;
 
+new_y = zeros(m, num_labels);
 
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
-
-% =========================================================================
-
-% Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
-
+for i = 1:m
+	new_y(i,y(i)) = 1;
 end
+
+J = (1 / m) * sum(sum(-new_y .* log(h) - (1 .- new_y) .* log(1 - h)));
+
+initiat_Theta1 = Theta1(:,2:input_layer_size+1);
+initiat_Theta2 = Theta2(:,2:hidden_layer_size+1);
+
+initiat_Theta1_sqr = initiat_Theta1 .^ 2;
+initiat_Theta2_sqr = initiat_Theta2 .^ 2;
+
+regularization = (lambda / (2 * m)) * (sum(initiat_Theta1_sqr(:)) + sum(initiat_Theta2_sqr(:)));
+
+J = J + regularization;
+
+% % -------------------------------------------------------------
+
+% % =========================================================================
+
+% % Unroll gradients
+% grad = [Theta1_grad(:) ; Theta2_grad(:)];
+
+
+% end
